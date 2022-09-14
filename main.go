@@ -14,7 +14,7 @@ func handleShortURL(writer http.ResponseWriter, req *http.Request) {
 	fmt.Println("originalURL: ", originalURL)
 
 	// generate random shortURL
-	shortURL := src.GenerateShortURL()
+	shortURL := src.GenerateShortURL(originalURL)
 	fmt.Println("shortURL: ", shortURL)
 
 	// save short and long URL to file
@@ -46,8 +46,8 @@ func main() {
 		ReadTimeout:  30 * time.Second,
 	}
 
-	// handleShortUrl function mapped to /short-url
-	serveMux.HandleFunc("/short-url", handleShortURL)
+	// handleShortUrl function mapped to /enterLongURL
+	serveMux.HandleFunc("/enterLongURL", handleShortURL)
 
 	// Server Listing on "localhost:8080"
 	srv.ListenAndServe()

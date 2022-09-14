@@ -8,7 +8,8 @@ import (
 	"strings"
 )
 
-func SaveToFile(shortURL string, longURL string) {
+// Saving LongURL corresponding to ShortURL
+func SaveInFile(shortURL string, longURL string) {
 	fileName := "url.properties"
 	prop := shortURL + "=" + longURL
 	if _, err := os.Stat(fileName); errors.Is(err, os.ErrNotExist) {

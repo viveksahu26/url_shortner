@@ -23,8 +23,7 @@ func SaveInFile(shortURL string, longURL string) {
 
 	} else {
 		fmt.Printf("File %s already exist.", fileName)
-		_, msg, fileContainLongURL := IsLongURLPresentInFile(fileName, longURL)
-		fmt.Println("\n", msg)
+		_, _, fileContainLongURL := IsLongURLPresentInFile(fileName, longURL)
 
 		if !fileContainLongURL {
 			file, err := os.OpenFile(fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)

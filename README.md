@@ -16,21 +16,44 @@
 ```
 
 # How to run directly from Docker Image !!
-`docker pull viveksahu26/my-url-shortner:latest`
+## Step:1 
+    
+    `docker pull viveksahu26/my-url-shortner:latest`
 
-Now create container from image:
-`docker run -d --name vivek1224 -P viveksahu26/my-url-shortner`
+## Step2: 
+    
+    ```
+    docker run --name my-short-url1 -d  -p 8090:8080  viveksahu26/my-url-shortner:latest
+    ```
 
-Run Command 
-`docker ps`
-Under PORT section you will see something like: 
-```0.0.0.0:49154->8080/tcp```
+## OR
 
-Now, copy and paste to your browser
-```http://localhost:49154/short-url?longURL=http://google.com/1346461234567890123456789/get/viveksahu26```
 
-General URL : ```http://localhost:<replace_by_your_port_no>/short-url?longURL=http:<enter_your_URL>```
+## Step:2
 
-DockerHub: https://hub.docker.com/repository/docker/viveksahu26/my-url-shortner
+    Create container from image:
 
-*NOTE*: Do not forget to change port number(49154) and also replace this url(http://google.com/1346461234567890123456789/get/viveksahu26) with your URL.
+    `docker run -d --name vivek1224 -P viveksahu26/my-url-shortner`
+
+    `docker ps`
+
+    Under PORT section you will see something like: 
+
+    0.0.0.0:49154->8080/tcp
+    
+    Your PORT Number is: 49154
+    And URL is: "http://google.com/1346461234567890123456789/get/viveksahu26"
+
+    Paste it to your Browser : 
+    http://localhost:<replace_by_your_port_no>/short-url?longURL=http:<enter_your_URL>
+    
+    Example:
+    Now, copy and paste to your browser:
+    
+    http://localhost:49154/short-url?longURL=http://google.com/1346461234567890123456789/get/viveksahu26
+    
+
+
+    DockerHub: https://hub.docker.com/repository/docker/viveksahu26/my-url-shortner
+
+    *NOTE*: Do not forget to change port number(49154) and also replace this url(http://google.com/1346461234567890123456789/get/viveksahu26) with your URL.

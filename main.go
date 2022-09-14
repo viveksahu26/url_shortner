@@ -18,6 +18,12 @@ func handleShortUrl(writer http.ResponseWriter, req *http.Request) {
 
 	// save short and long URL to file
 	src.SaveToFile(shortURL, originalURL)
+
+	host := req.Host
+
+	// build Response
+	resp := src.BuildURLResponse(host, shortURL, originalURL)
+	fmt.Println("response: ", resp)
 }
 
 func main() {

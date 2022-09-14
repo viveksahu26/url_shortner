@@ -31,4 +31,6 @@ Now, copy and paste to your browser
 
 General URL : ```http://localhost:<replace_by_your_port_no>/short-url?longURL=http:<enter_your_URL>```
 
+DockerHub: https://hub.docker.com/repository/docker/viveksahu26/my-url-shortner
+
 *NOTE*: Do not forget to change port number(49154) and also replace this url(http://google.com/1346461234567890123456789/get/viveksahu26) with your URL.

@@ -1,14 +1,14 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/viveksahu26/url_shortner/src"
 )
 
-func handleShortUrl(writer http.ResponseWriter, req *http.Request) {
+func handleShortURL(writer http.ResponseWriter, req *http.Request) {
 	// get original URL from GET method by quering
 	originalURL := req.URL.Query().Get("longURL")
 	fmt.Println("originalURL: ", originalURL)
@@ -18,33 +18,37 @@ func handleShortUrl(writer http.ResponseWriter, req *http.Request) {
 	fmt.Println("shortURL: ", shortURL)
 
 	// save short and long URL to file
-	src.SaveToFile(shortURL, originalURL)
+	src.SaveInFile(shortURL, originalURL)
 
-	host := req.Host
+	host := "www.simplifyurl.com"
 
 	// build Response
-	resp := src.BuildURLResponse(host, shortURL, originalURL)
+	resp := src.BuildURLWithResponse(host, shortURL, originalURL)
 	fmt.Println("response: ", resp)
 
-	// Converting response  JSON form
-	jsonBytes, err := json.Marshal(resp)
+	err := src.RespondWithJSON(writer, 200, resp)
 	if err != nil {
-		writer.Write([]byte("Failed to generate response"))
+		writer.Write([]byte("Failed to respond with JSON"))
 	}
-
-	writer.Header().Set("Content-Type", "application/json")
-	writer.WriteHeader(http.StatusOK)
-	writer.Write(jsonBytes)
 }
 
+const addr = "localhost:8080"
+
 func main() {
-	fmt.Println("URL Shorten Service")
+	fmt.Println("URL Shorten Service Starts ...")
+
+	// multiplexer: It provides seperate server interface for each request.
+	serveMux := http.NewServeMux()
+	srv := http.Server{
+		Handler:      serveMux,
+		Addr:         addr,
+		WriteTimeout: 30 * time.Second,
+		ReadTimeout:  30 * time.Second,
+	}
 
 	// handleShortUrl function mapped to /short-url
-	http.HandleFunc("/short-url", handleShortUrl)
+	serveMux.HandleFunc("/short-url", handleShortURL)
 
-	err := http.ListenAndServe(":8080", nil)
-	if err != nil {
-		panic(err)
-	}
+	// Server Listing on "localhost:8080"
+	srv.ListenAndServe()
 }

@@ -33,6 +33,10 @@ func handleShortUrl(writer http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		writer.Write([]byte("Failed to generate response"))
 	}
+
+	writer.Header().Set("Content-Type", "application/json")
+	writer.WriteHeader(http.StatusOK)
+	writer.Write(jsonBytes)
 }
 
 func main() {

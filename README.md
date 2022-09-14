@@ -10,6 +10,6 @@ Whereas,
     And let's say your URL is *http://google.com/1346461234567890123456789/get/vivekkumarsahu*
 
 3) You will get output
------------------------------
+```
 {"originalURL":"http://google.com/1346461234567890123456789/get/vivekkumarsahu","shortURL":"http://localhost:8080/RpP^goh8"}
------------------------------
+```

@@ -5,10 +5,10 @@
 1) go run main.go
 
 2)  
-    Enter your URL after *http://localhost:8080/short-url?longURL=*
+    Enter your URL after *http://localhost:8080/enterLongURL?longURL=*
     And let's say your URL is *http://google.com/1346461234567890123456789/get/vivekkumarsahu*
     Finally you complete URL will look like:
-```http://localhost:8080/short-url?longURL=http://google.com/1346461234567890123456789/get/vivekkumarsahu```
+```http://localhost:8080/enterLongURL?longURL=http://google.com/1346461234567890123456789/get/vivekkumarsahu```
 
 3) You will get output
 ```
@@ -49,11 +49,16 @@
     
     Example:
     Now, copy and paste to your browser:
-    
-    http://localhost:49154/short-url?longURL=http://google.com/1346461234567890123456789/get/viveksahu26
+
+## Step:3
+    http://localhost:8090/enterLongURL?longURL=http://google.com/1346461234567890123456789/get/viveksahu26
+
+    OR
+
+    http://localhost:49154/enterLongURL?longURL=http://google.com/1346461234567890123456789/get/viveksahu26
     
 
 
-    DockerHub: https://hub.docker.com/repository/docker/viveksahu26/my-url-shortner
+    Docker Image: https://hub.docker.com/repository/docker/viveksahu26/my-url-shortner:v1.0.0
 
     *NOTE*: Do not forget to change port number(49154) and also replace this url(http://google.com/1346461234567890123456789/get/viveksahu26) with your URL.

@@ -19,7 +19,6 @@ func GenerateShortURL(longURL string) string {
 
 	if isFilePresent {
 		shortAndLongURLKeyValuePair, _, fileContainLongURL := IsLongURLPresentInFile(fileName, longURL)
-
 		if fileContainLongURL {
 			// then retrieve ShortURL from there.
 			if shorturl, ok := shortAndLongURLKeyValuePair[longURL]; ok {

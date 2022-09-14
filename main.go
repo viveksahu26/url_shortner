@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -24,6 +25,14 @@ func handleShortUrl(writer http.ResponseWriter, req *http.Request) {
 	// build Response
 	resp := src.BuildURLResponse(host, shortURL, originalURL)
 	fmt.Println("response: ", resp)
+
+	// Converting response  JSON form
+	jsonBytes, err := json.Marshal(resp)
+	fmt.Println("jsonBytes: ", jsonBytes)
+
+	if err != nil {
+		writer.Write([]byte("Failed to generate response"))
+	}
 }
 
 func main() {

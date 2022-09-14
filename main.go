@@ -34,13 +34,8 @@ func handleShortURL(writer http.ResponseWriter, req *http.Request) {
 }
 
 func healthCheckUp(w http.ResponseWriter, r *http.Request) {
-	method := r.Method
-	if method == "GET" {
-		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("Health of Server is UP & Running..."))
-	} else {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-	}
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Health of Server is UP & Running..."))
 }
 
 const addr = "localhost:8080"

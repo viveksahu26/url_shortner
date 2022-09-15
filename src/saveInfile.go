@@ -49,7 +49,7 @@ func IsLongURLPresentInFile(fileName, longURL string) (map[string]string, string
 	}
 	fileContent := strings.Split(string(fileBytes), "\n")
 
-	var fileContainLongURL bool
+	fileContainLongURL := false
 	var message string
 	ShortAndLongURLValue := make(map[string]string)
 	for _, line := range fileContent {
@@ -58,7 +58,7 @@ func IsLongURLPresentInFile(fileName, longURL string) (map[string]string, string
 			ShortAndLongURLValue[totalURL[1]] = totalURL[0]
 		}
 
-		if strings.Contains(line, longURL) {
+		if strings.HasSuffix(line, longURL) {
 			message = fmt.Sprintln("Yes, URL is already present in the file")
 			fileContainLongURL = true
 			return ShortAndLongURLValue, message, fileContainLongURL

@@ -51,13 +51,25 @@ Docker Image: viveksahu26/shortingurl:v3.0.0
 
 Pull docker image:
 
-    `docker pull viveksahu26/shortingurl:v3.0.0`
+    docker pull viveksahu26/shortingurl:v3.0.0
 
 ### Step:2
 Run container in non-interactive mode
 
-    `docker run -d --name vivek -p 3000:8080 viveksahu26/shortingurl:v3.0.0`
+    docker run -d --name vivek -p 3000:8080 viveksahu26/shortingurl:v3.0.0
 
 Run container in interactive mode
 
-    `docker run --name vivek -p 3000:8080 viveksahu26/shortingurl:v3.0.0`
+    docker run --name vivek -p 3000:8080 viveksahu26/shortingurl:v3.0.0
+
+### Step:3 
+Search on browser
+
+    http://localhost:3000/short-url?longURL=http://google.com/1346461234567890123456789/get/viveksahu26
+
+Where, longURL=http://google.com/1346461234567890123456789/get/viveksahu26
+And port: 3000
+
+To check health of app:
+
+    http://localhost:3000/health

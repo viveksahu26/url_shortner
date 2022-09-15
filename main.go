@@ -49,28 +49,26 @@ func healthCheckUp(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("<h1>Health of Server is UP & Running... !!</h1>"))
 }
 
-const addr = "localhost:8080"
+// const addr = "localhost:8080"
 
 func main() {
 	fmt.Println("URL Shorten Service Starts ...")
 
-	// multiplexer: It provides seperate server interface for each request.
-	serveMux := http.NewServeMux()
-	srv := http.Server{
-		Handler: serveMux,
-		Addr:    addr,
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
 	}
+	fmt.Println("PORT is: ", port)
 
-	// handleShortUrl function mapped to /enterLongURL
-	serveMux.HandleFunc("/sort-url", handleShortURL)
+	// /health endpoint is mapped to healthCheckUp
+	http.HandleFunc("/health", healthCheckUp)
 
-	// healthCheckUp function mapped to /health
-	serveMux.HandleFunc("/health", healthCheckUp)
+	// /short-url endpoint is mapped to handleShortURL
+	http.HandleFunc("/short-url", handleShortURL)
 
-	// Server Listing on "localhost:8080"
-	err := srv.ListenAndServe()
+	// Server Listening on localhost:8080
+	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
-		fmt.Println("Could not serve.")
-		os.Exit(1)
+		panic(err)
 	}
 }

@@ -47,20 +47,21 @@ The advantage of saving Short URL and Long URL in the file is to retrieved that 
 
 ## Steps to reproduce Using Docker Image
 ### Step:1
-Docker Image: viveksahu26/shortingurl:v3.0.0
+Docker Image: viveksahu26/urlshortner:stable
+Link: https://hub.docker.com/repository/docker/viveksahu26/urlshortner
 
 Pull docker image:
 
-    docker pull viveksahu26/shortingurl:v3.0.0
+    docker pull viveksahu26/urlshortner:stable
 
 ### Step:2
 Run container in non-interactive mode
 
-    docker run -d --name vivek -p 3000:8080 viveksahu26/shortingurl:v3.0.0
+    docker run -d --name vivek -p 3000:8080 viveksahu26/urlshortner:stable
 
 Run container in interactive mode
 
-    docker run --name vivek -p 3000:8080 viveksahu26/shortingurl:v3.0.0
+    docker run --name vivek -p 3000:8080 viveksahu26/urlshortner:stable
 
 ### Step:3 
 Search on browser

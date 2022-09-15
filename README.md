@@ -33,14 +33,31 @@ The advantage of saving Short URL and Long URL in the file is to retrieved that 
     
     Enter your URL after *http://localhost:8080/sort-url?longURL=*
 
-    And let's say your Long URL: *http://google.com/1346461234567890123456789/get/vivekkumarsahu*
+    And let's say your Long URL: *http://google.com/1346461234567890123456789/get/viveksahu26*
 
     Finally you complete URL in the browser will look like:
 
-    http://localhost:8080/enterLongURL?longURL=http://google.com/1346461234567890123456789/get/vivekkumarsahu
+    http://localhost:8080/short-url?longURL=http://google.com/1346461234567890123456789/get/viveksahu26
 
 3) You will get output
 
     ```
-    {"originalURL":"http://google.com/1346461234567890123456789/get/vivekkumarsahu","shortURL":"http://localhost:8080/RpP^goh8"}
+    {"originalURL":"http://google.com/1346461234567890123456789/get/viveksahu26","shortURL":"http://localhost:8080/xtNFxaBwCG"}
     ```
+
+## Steps to reproduce Using Docker Image
+### Step:1
+Docker Image: viveksahu26/shortingurl:v3.0.0
+
+Pull docker image:
+
+    `docker pull viveksahu26/shortingurl:v3.0.0`
+
+### Step:2
+Run container in non-interactive mode
+
+    `docker run -d --name vivek -p 3000:8080 viveksahu26/shortingurl:v3.0.0`
+
+Run container in interactive mode
+
+    `docker run --name vivek -p 3000:8080 viveksahu26/shortingurl:v3.0.0`

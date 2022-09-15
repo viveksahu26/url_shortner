@@ -22,8 +22,12 @@ The advantage of saving Short URL and Long URL in the file is to retrieved that 
 3) Execute main program. 
 
     `go run main.go`
+    
+    You can provide your custom port
+    
+     `go run main.go  5000`
 
-*NOTE:*: Make sure that Port 8080 is free. For customize port you need to make changes in the codebase.
+*NOTE:*: Make sure that Port 8080 is free. By defaul Port is 8080. But you can customize accordingly by passing port number after command(go run main.go).
 
 4) Check the health of program
 

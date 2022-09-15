@@ -44,3 +44,20 @@ The advantage of saving Short URL and Long URL in the file is to retrieved that 
     ```
     {"originalURL":"http://google.com/1346461234567890123456789/get/viveksahu26","shortURL":"http://localhost:8080/xtNFxaBwCG"}
     ```
+
+## Steps to reproduce Using Docker Image
+### Step:1
+Docker Image: viveksahu26/shortingurl:v3.0.0
+
+Pull docker image:
+
+    `docker pull viveksahu26/shortingurl:v3.0.0`
+
+### Step:2
+Run container in non-interactive mode
+
+    `docker run -d --name vivek -p 3000:8080 viveksahu26/shortingurl:v3.0.0`
+
+Run container in interactive mode
+
+    `docker run --name vivek -p 3000:8080 viveksahu26/shortingurl:v3.0.0`

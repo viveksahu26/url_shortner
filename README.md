@@ -25,7 +25,11 @@ The advantage of saving Short URL and Long URL in the file is to retrieved that 
 
 *NOTE:*: Make sure that Port 8080 is free. For customize port you need to make changes in the codebase.
 
-4)  Go to browser:
+4) Check the health of program
+
+    http://localhost:8080/health
+
+5)  Go to browser:
     
     Enter your URL after *http://localhost:8080/sort-url?longURL=*
 

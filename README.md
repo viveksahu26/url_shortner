@@ -1,5 +1,6 @@
 # URL SHORTNER
 **URL shortner endpoint - returns a short URL**
+
 It is a service which takes long URL from the user and returns Short URL. 
 
 ## How URL Shortner Works !!

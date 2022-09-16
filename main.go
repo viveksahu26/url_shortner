@@ -8,6 +8,36 @@ import (
 	"github.com/viveksahu26/url_shortner/src"
 )
 
+// http://localhost:8080/long-url?sortURL=xtNFxaBwCG
+func handleLongURL(writer http.ResponseWriter, req *http.Request) {
+	// Procedure:
+	// Finally got Complete url
+	// Retrieve shortURL from it by Querying it.
+	// Once retrieve, check  check in file whether it contains short url or not.
+	// If file exist, then read that file:
+	// 1. loop over it's content.
+	// 2. Check line by line,
+	// 3. short URL is present in that line or not.
+	// 4. If present retun map and true boolean
+	// 5. Else  retuen false and empty value
+
+	if req.Method != "GET" {
+		writer.WriteHeader(http.StatusMethodNotAllowed)
+	} else {
+		// get original--> shortURL
+		originalURL := req.URL.Query().Get("sortURL")
+		fmt.Println("originalURL: ", originalURL)
+
+		longURL := src.CheckWhetherShortURLisPresentORNot(originalURL)
+		fmt.Println("longURL: ", longURL)
+
+		if longURL == "" {
+			writer.Write([]byte("<h1>HSorry, No corresponding longURL is present to the shortURL. !!</h1>"))
+		}
+		writer.Write([]byte(longURL))
+	}
+}
+
 func handleShortURL(writer http.ResponseWriter, req *http.Request) {
 	if req.Method != "GET" {
 		writer.WriteHeader(http.StatusMethodNotAllowed)
@@ -65,6 +95,9 @@ func main() {
 
 	// /short-url endpoint is mapped to handleShortURL
 	http.HandleFunc("/short-url", handleShortURL)
+
+	// /long-url endpoint is mapped to handleLongURL
+	http.HandleFunc("/long-url", handleLongURL)
 
 	// Server Listening on localhost:8080
 	err := http.ListenAndServe(":"+port, nil)

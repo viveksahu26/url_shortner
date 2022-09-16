@@ -42,27 +42,53 @@ func IsFileExist(fileName string) (bool, error) {
 	return true, nil
 }
 
-func IsLongURLPresentInFile(fileName, longURL string) (map[string]string, string, bool) {
+// It can check whether LongURL is present in the file or not.
+// As well as also it can check whether shortURL is present in the file or not.
+func IsLongURLPresentInFile(fileName, url string) (map[string]string, string, bool) {
 	fileBytes, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		log.Fatalln(err)
 	}
 	fileContent := strings.Split(string(fileBytes), "\n")
 
+	incommingLongURLisShortURL := false
+	if len(url) == 10 {
+		// way  of differentialting bewtween URL: whether the argument url
+		// is actual longURL or shortURL
+		// ShortURL is of length 10
+
+		// yes, it's a shortURL
+		incommingLongURLisShortURL = true
+	}
+	fmt.Println("incommingLongURLisShortURL: ", incommingLongURLisShortURL)
+
 	fileContainLongURL := false
 	var message string
 	ShortAndLongURLValue := make(map[string]string)
+
 	for _, line := range fileContent {
 		totalURL := strings.Split(line, "=")
 		if len(totalURL) == 2 {
+			// if Long URL, then store key as LongURL and value as ShortURL in map
 			ShortAndLongURLValue[totalURL[1]] = totalURL[0]
+
+			// if short URL, then store key as shortURL and value as LongURL in map
+			if incommingLongURLisShortURL {
+				fmt.Println("storing map values for shortURL as key and longURL as value")
+				ShortAndLongURLValue[totalURL[0]] = totalURL[1]
+			}
 		}
 
-		if strings.HasSuffix(line, longURL) {
+		if strings.HasSuffix(line, url) && !incommingLongURLisShortURL {
+			message = fmt.Sprintln("Yes, URL is already present in the file")
+			fileContainLongURL = true
+			return ShortAndLongURLValue, message, fileContainLongURL
+		} else if strings.HasPrefix(line, url) && incommingLongURLisShortURL {
 			message = fmt.Sprintln("Yes, URL is already present in the file")
 			fileContainLongURL = true
 			return ShortAndLongURLValue, message, fileContainLongURL
 		}
+
 		message = fmt.Sprintln("URL is not present in the file.")
 	}
 	fmt.Println("\n", message)

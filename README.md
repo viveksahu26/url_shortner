@@ -64,10 +64,13 @@ The advantage of saving Short URL and Long URL in the file is to retrieved that 
 6) Convert ShortURL into LongURL:
 
     Let's say shortURL=xtNFxaBwCG
+    
     To get it's longURL enter below URL in the browser
+    
     http://localhost:8080/long-url?sortURL=xtNFxaBwCG
 
-    You will get return value as:
+    It will return longURL to you as:
+    
     http://google.com/1346461234567890123456789/get/viveksahu26
 
 ## Steps to reproduce Using Docker Image

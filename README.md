@@ -2,6 +2,16 @@
 **URL shortner endpoint - returns a short URL**
 
 It is a service which takes long URL from the user and returns Short URL. 
+It provides 3 service.
+
+1) health checks: it ensures that app is running.
+Example: `http://localhost:8080/health`
+
+2) short url : it takes long url and returns short url
+Example: `http://localhost:8080/short-url?longURL=http://google.com/1346461234567890123456789/get/viveksahu26`
+
+3) long url : it takes short url and returns long url
+Example: `http://localhost:8080/long-url?sortURL=xtNFxaBwCG`
 
 ## How URL Shortner Works !!
 It replaces long URL by randomly generated characters of size 10. 
@@ -33,7 +43,7 @@ The advantage of saving Short URL and Long URL in the file is to retrieved that 
 
     http://localhost:8080/health
 
-5)  Go to browser:
+5)  Convert longURL into ShortURL:
     
     Enter your URL after *http://localhost:8080/sort-url?longURL=*
 
@@ -43,11 +53,22 @@ The advantage of saving Short URL and Long URL in the file is to retrieved that 
 
     http://localhost:8080/short-url?longURL=http://google.com/1346461234567890123456789/get/viveksahu26
 
-3) You will get output
+    http://localhost:8080/long-url?sortURL=xtNFxaBwCG
+
+     You will get output
 
     ```
     {"originalURL":"http://google.com/1346461234567890123456789/get/viveksahu26","shortURL":"http://localhost:8080/xtNFxaBwCG"}
     ```
+
+6) Convert ShortURL into LongURL:
+
+    Let's say shortURL=xtNFxaBwCG
+    To get it's longURL enter below URL in the browser
+    http://localhost:8080/long-url?sortURL=xtNFxaBwCG
+
+    You will get return value as:
+    http://google.com/1346461234567890123456789/get/viveksahu26
 
 ## Steps to reproduce Using Docker Image
 ### Step:1

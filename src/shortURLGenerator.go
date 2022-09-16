@@ -1,6 +1,7 @@
 package src
 
 import (
+	"fmt"
 	"math/rand"
 )
 
@@ -32,4 +33,31 @@ func GenerateShortURL(longURL string) string {
 		randomChar[i] = allCharacters[rand.Intn(len(allCharacters))]
 	}
 	return string(randomChar)
+}
+
+// If file exist, then read that file, otherwise return empty:
+// 1. loop over it's content.
+// 2. Check line by line,
+// 3. that short URL is present in that line or not.
+// 4. retun.
+
+// Check whether Short URL is present or not.
+// If present returns shorturl, else empty string
+func CheckWhetherShortURLisPresentORNot(shorturl string) string {
+	fmt.Println("Yes, you are inside CheckWhetherShortURLisPresentORNot")
+
+	fileName := "url.properties"
+	isFilePresent, _ := IsFileExist(fileName)
+
+	if isFilePresent {
+		shortAndLongURLKeyValuePair, _, fileContainShortURL := IsLongURLPresentInFile(fileName, shorturl)
+		if fileContainShortURL {
+			// then retrieve ShortURL from there.
+			if longurl, ok := shortAndLongURLKeyValuePair[shorturl]; ok {
+				return longurl
+			}
+		}
+	}
+
+	return ""
 }

@@ -1,4 +1,6 @@
 # URL SHORTNER
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/viveksahu26/url_shortner/badge)](https://securityscorecards.dev/viewer/?uri=github.com/viveksahu26/url_shortner)
+
 **URL shortner endpoint - returns a short URL**
 
 It is a service which takes long URL from the user and returns Short URL. 

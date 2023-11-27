@@ -25,7 +25,20 @@ builds:
       - amd64
     binary: url_shortner-linux-{{ .Arch }}
     main: ./main.go
-    
+    no_unique_dist_dir: true
+
+  - id: windows-amd64
+    goos:
+      - windows
+    goarch:
+      - amd64
+    ldflags:
+      - -buildmode=exe
+      - "{{ .Env.LDFLAGS }}"
+    binary: url_shortner-windows-{{ .Arch }}
+    main: ./main.go
+    no_unique_dist_dir: true
+
 
 archives:
   - format: binary

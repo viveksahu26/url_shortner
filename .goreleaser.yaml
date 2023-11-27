@@ -16,13 +16,16 @@ sboms:
   - artifacts: binary
 
 builds:
-  - id: url_shortner
+  - id: linux-amd64
     env:
       - CGO_ENABLED=0
     goos:
       - linux
     goarch:
       - amd64
+    binary: url_shortner-linux-{{ .Arch }}
+    main: ./main.go
+    
 
 archives:
   - format: binary

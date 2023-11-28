@@ -58,3 +58,19 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
+
+nfpms:
+  - id: url_shortner
+    package_name: url_shortner
+    file_name_template: "{{ .ConventionalFileName }}"
+    vendor: viveksahu26
+    homepage: https://github.com/viveksahu26/
+    maintainer: viveksahu26
+    builds:
+      - linux
+    description: It primarily used for converting long URL into short
+    license: "Apache License 2.0"
+    formats:
+      - apk
+      - deb
+      - rpm

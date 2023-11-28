@@ -16,13 +16,32 @@ sboms:
   - artifacts: binary
 
 builds:
-  - id: url_shortner
+  - id: linux-amd64
     env:
       - CGO_ENABLED=0
     goos:
       - linux
     goarch:
       - amd64
+    binary: url_shortner-linux-{{ .Arch }}
+    main: ./main.go
+    no_unique_dist_dir: true
+
+  - id: windows-amd64
+    goos:
+      - windows
+    goarch:
+      - amd64
+    ldflags:
+      - -buildmode=exe
+      - -s -w
+        -X "github.com/viveksahu26/url_shortner/buildversion.BuildVersion={{.Version}}"
+        -X "github.com/viveksahu26/url_shortner/buildversion.BuildTime={{time "2006-01-02T15:04:05Z07:00"}}"
+        -X "github.com/viveksahu26/url_shortner/buildversion.BuildCommit={{.FullCommit}}"
+    binary: url_shortner-windows-{{ .Arch }}
+    main: ./main.go
+    no_unique_dist_dir: true
+
 
 archives:
   - format: binary
@@ -33,3 +52,25 @@ archives:
 checksum:
   name_template: "{{ .ProjectName }}_checksums.txt"
 
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
+
+nfpms:
+  - id: url_shortner
+    package_name: url_shortner
+    file_name_template: "{{ .ConventionalFileName }}"
+    vendor: viveksahu26
+    homepage: https://github.com/viveksahu26/
+    maintainer: viveksahu26
+    builds:
+      - linux
+    description: It primarily used for converting long URL into short
+    license: "Apache License 2.0"
+    formats:
+      - apk
+      - deb
+      - rpm

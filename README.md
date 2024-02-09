@@ -2,6 +2,12 @@
 
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/viveksahu26/url_shortner/badge)](https://securityscorecards.dev/viewer/?uri=github.com/viveksahu26/url_shortner)
 
+## How to use url_shortner cli
+
+- `go run main.go short --url="http://google.com/1346461234567890123456789/get/viveksahu266"`
+
+The command means, return the `short` url of provided `long` url
+
 **URL shortner endpoint - returns a short URL**
 It is a service which takes long URL from the user and returns Short URL.
 It provides 3 service.

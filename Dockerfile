@@ -4,7 +4,7 @@ WORKDIR /app
 
 ADD .  /app
 
-RUN go build -o /url_shortner
+RUN go build -o ./cmd/url_shortner
 
 EXPOSE 8080
 

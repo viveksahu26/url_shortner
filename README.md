@@ -4,13 +4,16 @@
 
 ## How to use url_shortner cli
 
-- `go run main.go short --url="http://google.com/1346461234567890123456789/get/viveksahu266"`
+- `go run ./cmd/url_shortner/main.go short --url="http://google.com/1346461234567890123456789/get/viveksahu266"`
 
 The command means, return the `short` url of provided `long` url
 
 **URL shortner endpoint - returns a short URL**
 It is a service which takes long URL from the user and returns Short URL.
 It provides 3 service.
+
+0) Start the server
+`$ go run ./cmd/url_shortner/main.go server --port="8080"`
 
 1) health checks: it ensures that app is running.
 Example: `http://localhost:8080/health`

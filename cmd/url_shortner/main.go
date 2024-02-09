@@ -36,10 +36,8 @@ func main() {
 	case "server":
 		serverCmd.Parse(os.Args[2:])
 		fmt.Printf("Starting server on port %s...\n", *port)
-		http.HandleFunc("/health", short.HealthCheckUp)
-		http.HandleFunc("/short-url", short.HandleShortURL)
-		http.HandleFunc("/long-url", short.HandleLongURL)
 		// setupRoutes() // Function to set up web routes
+		setupRoutes()
 		log.Fatal(http.ListenAndServe(":"+*port, nil))
 	default:
 		fmt.Println("expected 'short' or 'server' subcommands")
@@ -47,8 +45,8 @@ func main() {
 	}
 }
 
-// func setupRoutes() {
-// 	http.HandleFunc("/health", src.HealthCheckUp)
-// 	http.HandleFunc("/short-url", src.HandleShortURL)
-// 	http.HandleFunc("/long-url", src.HandleLongURL)
-// }
+func setupRoutes() {
+	http.HandleFunc("/health", short.HealthCheckUp)
+	http.HandleFunc("/short-url", short.HandleShortURL)
+	http.HandleFunc("/long-url", short.HandleLongURL)
+}

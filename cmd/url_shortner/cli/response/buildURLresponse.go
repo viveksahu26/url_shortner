@@ -1,4 +1,4 @@
-package src
+package response
 
 type URLResponse struct {
 	OriginalURL string `json:"originalURL"`

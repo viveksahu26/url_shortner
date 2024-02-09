@@ -1,8 +1,10 @@
-package src
+package short
 
 import (
 	"fmt"
 	"math/rand"
+
+	"github.com/viveksahu26/url_shortner/cmd/url_shortner/cli/save"
 )
 
 type Result struct {
@@ -16,10 +18,10 @@ type Result struct {
 // Otherwise generate new ShortURL
 func GenerateShortURL(longURL string) string {
 	fileName := "url.properties"
-	isFilePresent, _ := IsFileExist(fileName)
+	isFilePresent, _ := save.IsFileExist(fileName)
 
 	if isFilePresent {
-		shortAndLongURLKeyValuePair, _, fileContainLongURL := IsLongURLPresentInFile(fileName, longURL)
+		shortAndLongURLKeyValuePair, _, fileContainLongURL := save.IsLongURLPresentInFile(fileName, longURL)
 		if fileContainLongURL {
 			// then retrieve ShortURL from there.
 			if shorturl, ok := shortAndLongURLKeyValuePair[longURL]; ok {
@@ -47,10 +49,10 @@ func CheckWhetherShortURLisPresentORNot(shorturl string) string {
 	fmt.Println("Yes, you are inside CheckWhetherShortURLisPresentORNot")
 
 	fileName := "url.properties"
-	isFilePresent, _ := IsFileExist(fileName)
+	isFilePresent, _ := save.IsFileExist(fileName)
 
 	if isFilePresent {
-		shortAndLongURLKeyValuePair, _, fileContainShortURL := IsLongURLPresentInFile(fileName, shorturl)
+		shortAndLongURLKeyValuePair, _, fileContainShortURL := save.IsLongURLPresentInFile(fileName, shorturl)
 		if fileContainShortURL {
 			// then retrieve ShortURL from there.
 			if longurl, ok := shortAndLongURLKeyValuePair[shorturl]; ok {

@@ -58,19 +58,17 @@ jobs:
         with:
           images: |
             viveksahu26/url_shortner
-            ghcr.io/${{ github.repository }}
-          tags: type=sha,format=long
+            ghcr.io/viveksahu26/${{ github.repository }}
         
 
       - name: Build and push Containers images
         id: build-and-push
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
-        #   context: .
+          context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-        #   labels: ${{ steps.meta.outputs.labels }}
-          platforms: linux/amd64,linux/arm/v7,linux/arm64
+          labels: ${{ steps.meta.outputs.labels }}
 
       - name: Sign image with a key
         run: |

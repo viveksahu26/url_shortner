@@ -5,6 +5,16 @@ project_name: url_shortner
 
 version: 1
 
+gomod:
+  proxy: true
+
+env:
+  - GO111MODULE=on
+  - CGO_ENABLED=1
+  - DOCKER_CLI_EXPERIMENTAL=enabled
+  - COSIGN_YES=true
+  - LATEST_TAG=,latest
+
 before:
   hooks:
     # You may remove this if you don't use go modules.
@@ -16,16 +26,20 @@ sboms:
   - artifacts: binary
 
 builds:
-  - id: linux-amd64
+  - id: linux-amd64-{{ .Arch }}
     env:
       - CGO_ENABLED=0
     goos:
       - linux
     goarch:
       - amd64
+      - arm64
+      - arm
     binary: url_shortner-linux-{{ .Arch }}
-    main: ./main.go
+    main: ./cmd/url_shortner
+    mod_timestamp: '{{ .CommitTimestamp }}'
     no_unique_dist_dir: true
+    
 
   - id: windows-amd64
     goos:
@@ -45,8 +59,10 @@ builds:
 
 archives:
   - format: binary
-    # this name template makes the OS and Arch compatible with the results of `uname`.
     name_template: "{{ .Binary }}"
+    allow_different_binary_count: true
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}-{{ .Os }}-{{ .Arch }}"
     allow_different_binary_count: true
 
 checksum:
@@ -74,3 +90,7 @@ nfpms:
       - apk
       - deb
       - rpm
+    contents:
+      - src: /usr/bin/url_shortner-linux-{{ .Arch }}
+        dst: /usr/bin/url_shortner
+        type: "symlink"

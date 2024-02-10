@@ -28,8 +28,8 @@ sboms:
 builds:
   - id: linux
     no_unique_dist_dir: true
-    ldflags:
-      - "{{ .Env.LDFLAGS }}"
+    # ldflags:
+    #   - "{{ .Env.LDFLAGS }}"
     env:
       - CGO_ENABLED=0
     goos:

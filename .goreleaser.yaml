@@ -22,8 +22,8 @@ before:
 # gomod:
 #   proxy: true
  
-sboms:
-  - artifacts: archive
+# sboms:
+#   - artifacts: archive
 
 builds:
   - id: linux

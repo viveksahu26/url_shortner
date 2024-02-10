@@ -5,8 +5,8 @@ project_name: url_shortner
 
 version: 1
 
-gomod:
-  proxy: true
+# gomod:
+#   proxy: true
 
 env:
   - GO111MODULE=on

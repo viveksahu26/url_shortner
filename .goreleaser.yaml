@@ -11,9 +11,6 @@ version: 1
 env:
   - GO111MODULE=on
   - CGO_ENABLED=1
-  - DOCKER_CLI_EXPERIMENTAL=enabled
-  - COSIGN_YES=true
-  - LATEST_TAG=,latest
 
 before:
   hooks:
@@ -31,6 +28,8 @@ sboms:
 builds:
   - id: linux
     no_unique_dist_dir: true
+    ldflags:
+      - "{{ .Env.LDFLAGS }}"
     env:
       - CGO_ENABLED=0
     goos:
@@ -60,7 +59,7 @@ builds:
 
 
 archives:
-  - format: binary
+  - format: tar.gz
     name_template: "{{ .Binary }}"
     allow_different_binary_count: true
     
@@ -77,6 +76,9 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
+    - 'README'
+    - Merge pull request
+    - Merge branch
 
 nfpms:
   - id: url_shortner

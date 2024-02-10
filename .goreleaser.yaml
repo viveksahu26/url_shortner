@@ -38,7 +38,6 @@ builds:
     binary: url_shortner-linux-{{ .Arch }}
     main: ./cmd/url_shortner
     mod_timestamp: '{{ .CommitTimestamp }}'
-    no_unique_dist_dir: true
     
 
   - id: windows-amd64
@@ -53,8 +52,7 @@ builds:
         -X "github.com/viveksahu26/url_shortner/buildversion.BuildTime={{time "2006-01-02T15:04:05Z07:00"}}"
         -X "github.com/viveksahu26/url_shortner/buildversion.BuildCommit={{.FullCommit}}"
     binary: url_shortner-windows-{{ .Arch }}
-    main: ./main.go
-    no_unique_dist_dir: true
+    main: ./cmd/url_shortner
 
 
 archives:

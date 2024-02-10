@@ -20,13 +20,17 @@ before:
     # You may remove this if you don't use go modules.
     - go mod tidy
     # you may remove this if you don't need go generate
-    - go generate ./...
+    - /bin/bash -c 'if [ -n "$(git --no-pager diff --exit-code go.mod go.sum)" ]; then exit 1; fi'
 
+gomod:
+  proxy: true
+ 
 sboms:
   - artifacts: archive
 
 builds:
-  - id: linux-amd64-{{ .Arch }}
+  - id: linux
+    no_unique_dist_dir: true
     env:
       - CGO_ENABLED=0
     goos:

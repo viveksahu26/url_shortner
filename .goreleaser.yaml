@@ -19,8 +19,8 @@ before:
     # you may remove this if you don't need go generate
     - /bin/bash -c 'if [ -n "$(git --no-pager diff --exit-code go.mod go.sum)" ]; then exit 1; fi'
 
-gomod:
-  proxy: true
+# gomod:
+#   proxy: true
  
 sboms:
   - artifacts: archive
@@ -60,7 +60,7 @@ builds:
 
 archives:
   - format: tar.gz
-    name_template: "{{ .Binary }}"
+    name_template: "{{ .ProjectName }}-{{ .Os }}-{{ .Arch }}"
     allow_different_binary_count: true
     
   # - format: tar.gz

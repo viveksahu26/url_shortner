@@ -23,7 +23,7 @@ before:
 #   proxy: true
  
 sboms:
-  - artifacts: archive
+  - artifacts: binary
 
 builds:
   - id: linux

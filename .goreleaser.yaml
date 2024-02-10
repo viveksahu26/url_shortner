@@ -22,8 +22,8 @@ before:
 # gomod:
 #   proxy: true
  
-# sboms:
-#   - artifacts: archive
+sboms:
+  - artifacts: archive
 
 builds:
   - id: linux
@@ -93,8 +93,6 @@ nfpms:
     license: "Apache License 2.0"
     formats:
       - apk
-      - deb
-      - rpm
     contents:
       - src: /usr/bin/url_shortner-linux-{{ .Arch }}
         dst: /usr/bin/url_shortner

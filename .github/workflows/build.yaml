@@ -59,6 +59,7 @@ jobs:
         with:
           images: |
             viveksahu26/url_shortner
+            ghcr.io/${{ github.repository }}
         
 
       - name: Build and push Containers images

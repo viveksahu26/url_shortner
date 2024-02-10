@@ -1,0 +1,13 @@
+package:
+name: url-shortner
+version: 1.0.0
+release: 1
+source:
+  - https://github.com/viveksahu26/url_shortner/archive/refs/tags/v1.0.0.tar.gz
+build:
+  gopath: true
+  commands:
+    - go build -o url_shortner ./src
+install:
+  commands:
+    - install -Dm755 url_shortner "$PKGDIR"/usr/bin/url_shortner

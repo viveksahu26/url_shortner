@@ -1,13 +1,38 @@
 package:
-name: url-shortner
-version: 1.0.0
-release: 1
-source:
-  - https://github.com/viveksahu26/url_shortner/archive/refs/tags/v1.0.0.tar.gz
-build:
-  gopath: true
-  commands:
-    - go build -o url_shortner ./src
-install:
-  commands:
-    - install -Dm755 url_shortner "$PKGDIR"/usr/bin/url_shortner
+  name: url_shortner
+  version: 0.2.0
+  epoch: 0
+  description: It primarily used for converting long URL into short
+  copyright:
+    - license: Apache-2.0
+  # dependencies:
+  #   runtime:
+  #     - ca-certificates-bundle
+
+environment:
+  contents:
+    packages:
+      - busybox
+      - ca-certificates-bundle
+      - go
+  environment:
+    CGO_ENABLED: "0"
+
+pipeline:
+  - uses: fetch
+    with:
+      expected-sha256: 2ec7bcd0ccdfdf1f719d484ad6a5561163f5d15291eacf16e641cce5702e4960
+      uri: https://github.com/viveksahu26/url_shortner/archive/v${{package.version}}/url_shortner-v${{package.version}}.tar.gz"
+
+  - uses: go/build
+    with:
+      output: url_shortner
+      packages: ./cmd/url_shortner
+
+  - uses: strip
+
+update:
+  enabled: true
+  github:
+    identifier: viveksahu26/url_shortner
+    strip-prefix: v

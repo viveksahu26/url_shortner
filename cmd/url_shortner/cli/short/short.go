@@ -3,9 +3,6 @@ package short
 import (
 	"fmt"
 	"net/http"
-
-	"github.com/viveksahu26/url_shortner/cmd/url_shortner/cli/response"
-	"github.com/viveksahu26/url_shortner/cmd/url_shortner/cli/save"
 )
 
 // http://localhost:8080/long-url?sortURL=xtNFxaBwCG
@@ -50,32 +47,32 @@ func HandleLongURL(writer http.ResponseWriter, req *http.Request) {
 	}
 }
 
-func HandleShortURL(writer http.ResponseWriter, req *http.Request) {
-	if req.Method != "GET" {
-		writer.WriteHeader(http.StatusMethodNotAllowed)
-	} else {
-		// get original URL from GET method by quering
-		originalURL := req.URL.Query().Get("longURL")
-		fmt.Println("originalURL: ", originalURL)
+// func HandleShortURL(writer http.ResponseWriter, req *http.Request) {
+// 	if req.Method != "GET" {
+// 		writer.WriteHeader(http.StatusMethodNotAllowed)
+// 	} else {
+// 		// get original URL from GET method by quering
+// 		originalURL := req.URL.Query().Get("longURL")
+// 		fmt.Println("originalURL: ", originalURL)
 
-		// generate random shortURL
-		shortURL := GenerateShortURL(originalURL)
-		fmt.Println("shortURL: ", shortURL)
+// 		// generate random shortURL
+// 		shortURL := GenerateShortURL(originalURL)
+// 		fmt.Println("shortURL: ", shortURL)
 
-		// save short and long URL to file
-		save.SaveInFile(shortURL, originalURL)
+// 		// save short and long URL to file
+// 		save.SaveInFile(shortURL, originalURL)
 
-		host := req.Host
+// 		host := req.Host
 
-		// build Response
-		resp := response.BuildURLWithResponse(host, shortURL, originalURL)
+// 		// build Response
+// 		resp := response.BuildURLWithResponse(host, shortURL, originalURL)
 
-		err := response.RespondWithJSON(writer, 200, resp)
-		if err != nil {
-			writer.Write([]byte("<h1>Failed to respond with JSON</h1>"))
-		}
-	}
-}
+// 		err := response.RespondWithJSON(writer, 200, resp)
+// 		if err != nil {
+// 			writer.Write([]byte("<h1>Failed to respond with JSON</h1>"))
+// 		}
+// 	}
+// }
 
 func HealthCheckUp(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/health" {

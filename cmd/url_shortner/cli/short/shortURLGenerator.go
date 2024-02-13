@@ -1,6 +1,7 @@
 package short
 
 import (
+	"context"
 	"fmt"
 	"math/rand"
 
@@ -16,7 +17,10 @@ type Result struct {
 // First check LongURL is present in the file or not
 // If present, then get that existing shortURL corresponditing to that LongURL
 // Otherwise generate new ShortURL
-func GenerateShortURL(longURL string) string {
+func GenerateShortURL(ctx context.Context, longURL string, args []string) error {
+	fmt.Println("Inside GenerateShortURL function ")
+	fmt.Println("longURL: ", longURL)
+	fmt.Println("args: ", args)
 	fileName := "url.properties"
 	isFilePresent, _ := save.IsFileExist(fileName)
 
@@ -25,7 +29,7 @@ func GenerateShortURL(longURL string) string {
 		if fileContainLongURL {
 			// then retrieve ShortURL from there.
 			if shorturl, ok := shortAndLongURLKeyValuePair[longURL]; ok {
-				return shorturl
+				fmt.Println("Short URL is:", shorturl)
 			}
 		}
 	}
@@ -34,7 +38,11 @@ func GenerateShortURL(longURL string) string {
 	for i := range randomChar {
 		randomChar[i] = allCharacters[rand.Intn(len(allCharacters))]
 	}
-	return string(randomChar)
+	fmt.Println("Short URL is:", string(randomChar))
+	if string(randomChar) == "" {
+		return fmt.Errorf("Could Not convert long URL into Short URL")
+	}
+	return nil
 }
 
 // If file exist, then read that file, otherwise return empty:
